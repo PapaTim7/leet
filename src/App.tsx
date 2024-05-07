@@ -1,29 +1,42 @@
 import { useState } from "react";
 import "./App.css";
-import { RemoveNodesFromLinkedList } from "./tasks/removeNodesFromLinkedList";
+import { CounterClosures } from "./tasks/counterClosures";
+import { FunctionComposition } from "./tasks/functionComposition";
+import { Sleep } from "./tasks/sleep";
 
 function App() {
   const [selectedTaskId, setSelectedTaskId] = useState<
-    "removeNodesFromLinkedList" | ""
-  >("");
+    "counterClosures" | "functionComposition" | "sleep"
+  >("counterClosures");
 
   const renderSelectedTaskComponent = () => {
     switch (selectedTaskId) {
-      case "removeNodesFromLinkedList":
-        return <RemoveNodesFromLinkedList />;
+      case "sleep":
+        return <Sleep />;
+      case "functionComposition":
+        return <FunctionComposition />;
+      case "counterClosures":
       default:
-        return <>No tasks selected</>;
+        return <CounterClosures />;
     }
   };
 
   return (
     <>
       <h2>Select:</h2>
-      <div>
-        <button onClick={() => setSelectedTaskId("removeNodesFromLinkedList")}>
-          Remove Nodes from Linked List
+      <p>
+        <button onClick={() => setSelectedTaskId("counterClosures")}>
+          Counter (closures)
         </button>
-      </div>
+      </p>
+      <p>
+        <button onClick={() => setSelectedTaskId("functionComposition")}>
+          Function Composition
+        </button>
+      </p>
+      <p>
+        <button onClick={() => setSelectedTaskId("sleep")}>Sleep</button>
+      </p>
       <div className="task-container">{renderSelectedTaskComponent()}</div>
     </>
   );
